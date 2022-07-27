@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "node-fetch": "^3.2.9",
+    "slugify": "^1.6.5"
+  },
+  "name": "learning-node",
+  "description": "01 - Intro\r     - Nodejs basics\r     - EcmaScript 6\r     - Callback Functions\r     - Promises\r     - Array Functions",
+  "version": "1.0.0",
+  "main": "01-index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
