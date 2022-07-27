@@ -13,7 +13,6 @@ function App() {
       {/* <h1>
          { isLoggedIn &&`my name is ${name} ${surname}`}
       </h1>
-
       {!isLoggedIn &&'giriş yapmadınız'}
       isLoggedIn eğer false olursa */}
 
