@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Counter from "./components/Counter";
+import InputExample from "./components/InputExample";
 // import Counter from "./components/Counter";
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
 
   return (
     <>
+
+    <InputExample />
+
     <Counter />
 
       <h1>Hello {name} </h1>
