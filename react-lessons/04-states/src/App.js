@@ -1,42 +1,16 @@
 import React from 'react';
-import './App.css';
+import {useState} from 'react';
 
-import User from "./components/User";
-
-const friends = [
-  {
-    id: 1,
-    name : "Ali"
-  },
-  {
-    id: 2,
-    name : "Veli"
-  },
-  {
-    id: 3,
-    name : "Ahmet"
-  },
-  {
-    id: 4,
-    name : "Mehmet"
-  },
-]
 
 function App() {
+  const [name, setName] = useState('Savaş');
+  // name'e Savaş'ı atadık.
+  // aşağıda ise bir button oluşturduk. onclick durumunda ise setName ile değişeceği değeri belirttik.
 
   return   (
     <>
-      <User 
-        name="Savaş" 
-        lastname={"Görmüş"} 
-        isLoggedIn={true} 
-        age= {33} 
-        friends = {friends}
-        address = {{
-          title : "karşıyaka/izmir",
-          zip : 35560
-        }}
-        />
+      <h1>Hello {name}</h1>
+      <button onClick={() => setName('Başar')}>Click</button>
     </>
   )
 }
