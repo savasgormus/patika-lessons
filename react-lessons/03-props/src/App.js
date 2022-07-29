@@ -1,38 +1,42 @@
 import React from 'react';
 import './App.css';
-// import Header from './components/header';
 
-const name = "savaş";
-const surname = "görmüş";
-const isLoggedIn = true;
+import User from "./components/User";
+
+const friends = [
+  {
+    id: 1,
+    name : "Ali"
+  },
+  {
+    id: 2,
+    name : "Veli"
+  },
+  {
+    id: 3,
+    name : "Ahmet"
+  },
+  {
+    id: 4,
+    name : "Mehmet"
+  },
+]
 
 function App() {
+
   return   (
     <>
-
-      {/* <h1>
-         { isLoggedIn &&`my name is ${name} ${surname}`}
-      </h1>
-      {!isLoggedIn &&'giriş yapmadınız'}
-      isLoggedIn eğer false olursa */}
-
-      <h1>
-        {
-          isLoggedIn ? `my name is ${name} ${surname}` : 'giriş yapmadınız'
-        }
-      </h1>
-
-
-
-
-      {/* <h1>my name is {name}</h1>
-      <h1>{`my surname is ${surname}`}</h1>
-      <h1>hello world</h1>
-      <Header />
-      <label htmlFor="sasdasd">
-        Name
-        <input type="text" name="" id="sasdasd" />
-      </label> */}
+      <User 
+        name="Savaş" 
+        lastname={"Görmüş"} 
+        isLoggedIn={true} 
+        age= {33} 
+        friends = {friends}
+        address = {{
+          title : "karşıyaka/izmir",
+          zip : 35560
+        }}
+        />
     </>
   )
 }
