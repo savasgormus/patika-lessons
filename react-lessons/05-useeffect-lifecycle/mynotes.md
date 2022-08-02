@@ -1,0 +1,4 @@
+- component doğuyor, yaşıyor(mount olma anı - state ekleniyor, değişiyor vs) ve ölüyor (unmount).
+- component mount olduğu anda gerçekleşecek işlemleri yaptığımız tanımlardır. örneğin setInterval ile sürekli artan bir sayaç yaptık.
+- component ekrandan kalktığı anda bu sayacın arka planda işleme devam etmesi mantıksız. o yüzden useEffectin ilk parametresinin sonuna return () => ile unmount anını bildiriyoruz. özetle görünmeyen componentin state'ini güncelliyoruz.
+- buradaki amaç performans kaybını engellemek.
