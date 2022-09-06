@@ -1,15 +1,15 @@
+import axios from 'axios';
 import React from 'react'
 import { useEffect, useState } from 'react'
 
-const Users = () => {
+const Usersaxios = () => {
     
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then((data) => setUsers(data))
+        axios('https://jsonplaceholder.typicode.com/users')
+        .then((res) => setUsers(res.data))
         .catch(e => console.log(e))
         .finally(setIsLoading(false))
     }, [])
@@ -17,7 +17,7 @@ const Users = () => {
     
   return (
     <div>
-        <h1>Users</h1>
+        <h1>Users axios</h1>
 
         {isLoading && <div>Loading...</div>}
 
@@ -28,4 +28,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Usersaxios

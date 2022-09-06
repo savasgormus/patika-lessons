@@ -43,3 +43,41 @@ useEffect( ()=>{
     },[] )
 ``` 
 - bir diğer alternatif ise catch'den sonra .finally(()=> setIsLoading(false)) yaparak da bu sonuca ulaşabiliriz.
+
+```jsx
+useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then((data) => setUsers(data))
+        .catch(e => console.log(e))
+        .finally(setIsLoading(false))
+    }, [])
+```
+
+
+## Axios
+
+- native fetch ile yaptığımız bütün bu işlemleri axios kütüphanesi ile de yapabiliriz. aralarında büyük farklar olmamasına rağmen axios daha hızlı çalıştığı ve yazımı daha basit olduğu için tercih edebileceğimiz bir yöntem.
+
+- örneğin axios kullandığımızda gelen datayı obje olarak gönderdiği için '.then((data) => setUsers(data))' komutu ile json formatına çevirmemize gerek yok.
+- ayrıca axios daha çok browser desteğine sahip olduğu için daha çok kullanımı vardır.
+
+- yarn add axios ile kurulumu yapıyoruz ve  import axios from 'axios' ile import işlemimizi gerçekleştiriyoruz..
+
+
+- fetch yerine axios yazıyoruz ve stringify ifadesini kaldırıyoruz. geri kalanı tamamen aynı.
+
+```jsx
+ useEffect(() => {
+        axios('https://jsonplaceholder.typicode.com/users')
+        .then((res) => setUsers(res.data))
+        .catch(e => console.log(e))
+        .finally(setIsLoading(false))
+    }, [])
+```
+
+- fetch ile data => setUsers(data) ile çekiyorduk fakat axios bize bir response ve içerisinde bir data gönderdi. o yüzden res.data ile response'u çektik. eğer diğer örnekteki gibi data => setUsers(data) ile çekmeye çalışsaydık hiçbir şey görüntülemeyzdik.
+
+
+
+
