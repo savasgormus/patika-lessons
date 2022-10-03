@@ -59,7 +59,7 @@ function About() {
 
 # Url Parameters
 
-- user adında bir component oluşturduk ve routes çerisine ekledi.(routes dediğimiz eski versiyondaki switch). fakat user/:id şeklinde eklemeliyiz ki aşağıda yapacağımız uygulamalarda problem yaşamayalım.
+- user adında bir component oluşturduk ve routes içerisine ekledik.(routes dediğimiz eski versiyondaki switch). fakat user/:id şeklinde eklemeliyiz ki aşağıda yapacağımız uygulamalarda problem yaşamayalım.
 
 ```jsx
 //app.js
@@ -99,7 +99,55 @@ export default User
 
 - users.jsx dosyamıza useEffect ve useState'i import ettik. ve state'imizi boş bir array olarak tanımlayalım. ardından useEffect ile mount durumuda yüklenmesini sağlayacağız. 
 
-- yüklenmesi için öncelikle axios kütüphanemizi kuralım: yarn add axios
+- yüklenmesi için öncelikle axios kütüphanemizi kuralım ve import edelim: yarn add axios
+
+```jsx
+// users.jsx
+
+import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import axios from 'axios';
+
+function Users() {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+      axios('https://jsonplaceholder.typicode.com/users')
+      .then(res => setUsers(res.data))
+    }, [])
+    // useEffect ile mount anında fake api'den veriyi çektik.
+    
+    return (
+      <>
+        <main>
+          <h2>Welcome to the Users page!</h2>
+          <p>You can do this, I believe in you.</p>
+          <ul>
+            {/* map işlemi yapıyoruz ve sırayla bize api'den gelen verileri sıralıyor. */}
+            {
+              users.map((user) => (
+                <li key={user.id}>
+                  <Link to={`/user/${user.id}`}>{user.name}</Link>
+                  {/* her bir endpointi user id'ye göre belirlemesi için backtick ile linkledik. */}
+                </li>
+              ))
+            }
+          </ul>
+        </main>
+      </>
+    );
+  }
+export default Users
+```
+
+- gelen bilgileri map işlemi ile sıraladık. Link içerisine `` ile gideceği endpointi belirledik. user/id şeklinde yazdık.
+
+- sırada kullanıcılarının detay bilgileri görmek için yapacağımız işlemlere. user.jsx dosyamıza girdik: bu componente girdiğimzde bir istek yapacağız. bu yüzden useEffect() ve useState()'i import edelim. önce boş bir state tanımlayalım ve useEffect() kullanarak axios ile az önceki users.jsx componentimizde çektiğimiz veriyi çekelim.
+- axios ile çekeceğimiz linkte ufak bir değişiklik yapacağız: backtick ile linki alıp /users/${id} ile bitireceğiz. gelen respons'u da setUser(res.data) ile yazdık.
+
+- kullanıcılardan birine tıkladığımızda loading yazısını gelmesini istiyoruz. şimdi bunun için bir state tanımlayalım. state başlangıçta true olacak ve axios ile çektiğimiz veriler geldiğinde false'a düşerek kaybolacak. 
+
+- bir sonraki kullanıcıyı göstermesi için bir button oluşturacağız. Önce Link ile yapalım. import edelim ve Link to= kısmına backtick ile /user/$id + 1 diyelim. tabi burada id'yi string göreceği için bizi yanlış yönlendirecek. o yüzden bu ifadeyi parseInt(id) + 1 şeklinde yazmamız gerekecek. yine bir diğer dikkat etmemiz gereken nokta useEffect()'in ikinci parametresi olan arrayin içerisine id yazmalıyız ki çektiğimiz veri tekrar yüklensin.
 
 
 

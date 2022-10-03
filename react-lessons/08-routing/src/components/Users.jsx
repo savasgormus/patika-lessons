@@ -1,29 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function Users() {
     const [users, setUsers] = useState([]);
-    
+    // state'imizi tanımlıyoruz
+    const [loading, setLoading] = useState(true);
+    // yüklenirken loading yazısı gelmesini istiyoruz.
+
     useEffect(() => {
+      axios('https://jsonplaceholder.typicode.com/users')
+        .then(res => setUsers(res.data))
+        .finally(() => setLoading(false))
     }, [])
-    
+    // useEffect ile mount anında fake api'den veriyi çektik.
+
     return (
       <>
-        <main>
-          <h2>Welcome to the Users page!</h2>
-          <p>You can do this, I believe in you.</p>
-          <ul>
-            <li>
-              <Link to="/user/1">User 1</Link>
+        <h1>Users</h1>
+
+        {loading && <div>Loading...</div>}
+
+        <ul>
+          {users.map((user)=> (
+            <li key={user.id}>
+              <Link to={`/user/${user.id}`}> {user.name} </Link>
             </li>
-            <li>
-              <Link to="/user/2">User 2</Link>
-            </li>
-            <li>
-              <Link to="/user/3">User 3</Link>
-            </li>
-          </ul>
-        </main>
+          ) )}
+        </ul>
       </>
     );
   }
